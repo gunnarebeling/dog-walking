@@ -1,12 +1,20 @@
 import { getWalkers } from "./database.js"
+import { getCities } from "./database.js"
 
 const walkers = getWalkers()
+const cities = getCities()
 document.addEventListener("click",
     (click) =>{
         const whatWasClickedOn = click.target
        if (whatWasClickedOn.dataset.type === "walker") {
+            for (const city of cities) {
+                if (city.id === parseInt(whatWasClickedOn.dataset.cityId)){
+                    
+                    window.alert(`this walker works in ${city.name}`)
+                }
+                
+            }
         
-           window.alert(`this walker works in ${whatWasClickedOn.dataset.city}`)
        } 
     }
 )
@@ -16,7 +24,7 @@ export const Walkers = () => {
 
     for (const walker of walkers) {
         walkerHTML += `<li data-id="${walker.id}"
-                    data-city="${walker.city}"
+                    data-city="${walker.cityId}"
                     data-type= "walker">${walker.name}</li>`
     }
 
